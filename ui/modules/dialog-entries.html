@@ -123,18 +123,17 @@
                 <div ng-if="entry.discovery && entry.responses.length > 0" class="drop-down">
                     <!-- If there is more than one disco response, will display button and rest of answers in a drop down list -->
                     <div ng-if="entry.allResponses" class="buttonRnR" ng-click="entry.clicked = !entry.clicked">
-                        <span ng-show="entry.clicked">Collapse results - </span>
-                        <span ng-hide="entry.clicked">Expand to see more answers +</span></div>
+                        <span ng-show="entry.clicked">Collapse recommendations - </span>
+                        <span ng-hide="entry.clicked">Expand to see more recommendations +</span></div>
                     <div class="RnR-answers">
                         <div ng-show="entry.clicked">
                             <div class="answer-container" ng-repeat="entry in entry.allResponses track by $index ">
                                 <!-- Truncated text -->
-                                <div class="answers" ng-class="{firstAnswer:$first}" ng-bind-html="entry.lessAnswers">
-                                    {{entry.lessAnswers}}
+                                <div class="answers" ng-class="{firstAnswer:$first}"> <!-- ng-bind-html="entry.lessAnswers"> -->
+                                    <b style="color: #6E6E6E">{{entry.title}}:</b> {{entry.lessAnswers}}
                                 </div>
                                 <!-- Trigger/Open The Modal -->
-                                <div ng-click="entry.modalClicked = !entry.modalClicked" class="fullAnswerBtn">View Full
-                                    Review
+                                <div ng-click="entry.modalClicked = !entry.modalClicked" class="fullAnswerBtn">Explore further
                                 </div>
 
                                 <!-- The Modal -->
@@ -155,7 +154,12 @@
                                                   <td><div ng-repeat="i in dialogCtrl.range(entry.rating) track by $index" class="star"></div></td>
                                                 </tr>
                                                 <tr class="small">
-                                                  <td>{{entry.title}} <br> {{entry.runtime}} minutes long</td>
+                                                  <td> <h2> {{entry.title}} </h2>
+                                                      <br>
+                                                      <br> <b style="color: #6E6E6E">Runtime:</b> {{entry.runtime}} minutes
+                                                      <br> <b style="color: #6E6E6E">Released:</b> {{entry.release}}
+                                                      <br> <b style="color: #6E6E6E">Genre:</b> {{entry.genre}}
+                                                  </td>
                                                   <td><img src="{{entry.posterID}}.jpg" height="450" width="300" alt="movie_poster"></td>
                                                   <td style="text-align: right">{{entry.review_date | date}}</td>
                                                 </tr>
@@ -163,10 +167,7 @@
                                             </div>
                                             <!-- Full disco answer-->
                                             <p ng-bind-html="entry.review_text"></p>
-                                            <p ng-bind-html="entry.posterID"></p>
-                                            <p>{{entry.posterID}}<p>
-                                        <img src="/Users/ruchir/Desktop/BigGreen/w18/watson_cs189/project/Conv-Disc/posters/{{entry.posterID}}.jpg" height="450" width="300" alt="movie_poster">
-                                        <img src="../../posters/{{entry.posterID}}.jpg" height="450" width="300" alt="movie_poster">
+
                                         </div>
                                     </div>
                                 </div>

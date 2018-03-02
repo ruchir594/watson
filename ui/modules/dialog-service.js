@@ -274,14 +274,18 @@ var newUser;
                                                 // Mock up a version of the metadata object present in datacrawler output
                                                 var text = lastRes.responses[i].plot;
                                                 console.log(text);
+                                                var genre_text = " ";
+                                                for(var temp_cs189 = 0; temp_cs189 < lastRes.responses[i].genre.length; temp_cs189++){
+                                                    genre_text = genre_text + lastRes.responses[i].genre[temp_cs189] + ", ";
+                                                }
 
-                                                var mockMetadata = { review_text : 'ruchir- ' + text,
+                                                var mockMetadata = { review_text : text,
                                                                      lessAnswers : truncateText(text) + "...",
                                                                      posterID : lastRes.responses[i].movie_id,
                                                                      title: lastRes.responses[i].title,
                                                                      runtime: lastRes.responses[i].runtime,
                                                                      release: lastRes.responses[i].release,
-                                                                     genre: lastRes.responses[i].genre };
+                                                                     genre: genre_text.slice(0, -2) };
 
                                                 allAnswers.push(mockMetadata);
 
